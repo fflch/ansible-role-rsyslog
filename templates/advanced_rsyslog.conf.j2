@@ -93,6 +93,16 @@ Target="{{ rsyslog_remote }}" Port="{{ rsyslog_remote_port }}" Protocol="{{ 'tcp
 {% endif %}
 
 {% if rsyslog_remote is not defined %}
-$template RemoteHost,"/var/syslog/hosts/%HOSTNAME%/%$YEAR%/%$MONTH%/%$DAY%/syslog.log"
-*.* ?RemoteHost
+
+$template nuvem,"/var/syslog/hosts/%FROMHOST-IP%/%HOSTNAME%/%$YEAR%/%$MONTH%/%$DAY%/%syslogfacility-text%.log"
+$template redelocal,"/var/syslog/hosts/%FROMHOST-IP%/%$YEAR%/%$MONTH%/%$DAY%/%syslogfacility-text%.log"
+
+if ($fromhost-ip == '200.144.255.47') then {
+   *.* ?nuvem
+}
+else {
+    *.* ?redelocal
+}
+
 {% endif %}
+
