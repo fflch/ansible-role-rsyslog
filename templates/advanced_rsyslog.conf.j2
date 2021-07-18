@@ -92,7 +92,7 @@ Target="{{ rsyslog_remote }}" Port="{{ rsyslog_remote_port }}" Protocol="{{ 'tcp
 # ### end of the forwarding rule ###
 {% endif %}
 
-{% if rsyslog_remote is not defined %}
+{% if rsyslog_receiver %}
 
 $template nuvem,"/var/syslog/hosts/%FROMHOST-IP%/%HOSTNAME%/%$YEAR%/%$MONTH%/%$DAY%/%syslogfacility-text%.log"
 $template redelocal,"/var/syslog/hosts/%FROMHOST-IP%/%$YEAR%/%$MONTH%/%$DAY%/%syslogfacility-text%.log"
