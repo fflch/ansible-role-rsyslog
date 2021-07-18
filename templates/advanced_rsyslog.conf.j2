@@ -74,7 +74,7 @@ uucp,news.crit                                          /var/log/spooler
 local7.*                                                /var/log/boot.log
 
 
-{% if rsyslog_remote is defined %}
+{% if not rsyslog_receiver %}
 # ### sample forwarding rule ###
 action(type="omfwd"  
 # # An on-disk queue is created for this action. If the remote host is
